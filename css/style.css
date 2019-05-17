@@ -1,0 +1,41 @@
+body{
+    background-color: #f4f4f4;
+    color: 250;
+    margin: 0;
+}
+
+header{
+    background-color: seagreen;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.container{
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+#navbar{
+    background-color: #333;
+    color: #fff;
+}
+
+#navbar ul{
+    padding: 0;
+    list-style: none;
+}
+
+#navbar li{
+    display: inline;
+}
+
+#navbar a{
+    padding: 10px;
+    border: 2px #ccc solid;
+    font-size: 18px;
+    align-content: center;
+}
