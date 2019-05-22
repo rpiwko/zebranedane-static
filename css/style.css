@@ -33,9 +33,19 @@ a {
     display: inline;
 }
 
-#navbar a{
+.btn-nav{
     padding: 10px;
     border: 2px #ccc solid;
     font-size: 18px;
     align-content: center;
 }
+
+.btn-current-page{
+    padding: 10px;
+    /* border: 2px red solid; */
+    border: 2px #808080 solid;
+    color: #808080;
+    font-size: 18px;
+    align-content: center;
+}
+
