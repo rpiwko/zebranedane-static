@@ -6,7 +6,7 @@ function drawSingleChart(tagId, resultsSet) {
     var charYs = [];
     for (var property in resultsSet) {        
         charXs.push(property)
-        charYs.push(resultsSet[property] / 1000)
+        charYs.push(resultsSet[property])
     }
     console.log(charXs);
     console.log(charYs);
@@ -16,12 +16,37 @@ function drawSingleChart(tagId, resultsSet) {
         series: [ charYs.slice(0, 8) ]
     };
 
-    var options = {
-        width: 800,
-        height: 200
+    var options = {        
+        height: 200,
+        fullWidth: true,
+        chartPadding: {
+            right: 80
+          },
+        axisY: {
+            labelInterpolationFnc: function(value) {
+              return (value / 1000) + 'k';
+            }
+        }
     };
 
-    new Chartist.Line(tagId, charData, options);
+    var responsiveOptions = [
+        ['screen and (max-width: 800px)', {
+          axisX: {
+            labelInterpolationFnc: function(value, index) {
+              return index % 2 === 0 ? value : null;
+            }
+          }
+        }],
+        ['screen and (max-width: 450px)', {
+            axisX: {
+              labelInterpolationFnc: function(value, index) {
+                return index % 4 === 0 ? value : null;
+              }
+            }
+          }]
+    ];
+
+    new Chartist.Bar(tagId, charData, options, responsiveOptions);
 }
 
 function drawCharts(dbExtract) {

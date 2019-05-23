@@ -19,6 +19,10 @@ a {
     overflow: hidden;
 }
 
+.chart-title{
+    text-align: center;
+}
+
 #navbar{
     background-color: #333;
     color: #fff;
@@ -42,16 +46,12 @@ a {
 
 .btn-current-page{
     padding: 10px;
-    /* border: 2px red solid; */
     border: 2px #808080 solid;
     color: #808080;
     font-size: 18px;
     align-content: center;
 }
 
-.chart{
-    align-content: stretch;
-    width: 100;
-    height: 500;
+.chart-bar .ct-bar {
+    stroke-width: 30px
 }
-
