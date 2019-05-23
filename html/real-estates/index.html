@@ -2,10 +2,8 @@
 <html>
 <head>
     <title>zebranedane.pl</title>
-    <link rel="stylesheet" type="text/css" href="../../css/style.css">
-    <link rel="stylesheet" href="../../chartist/chartist.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">    
-</head>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css">    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
 <body>
 
     <header id="main-header">
@@ -26,22 +24,23 @@
 
     <section class ="container" id="chart-avg-renting-price">
             <h3>Średnie ceny wynajmu mieszkania w Polsce</h3>
-            <div class="ct-chart" id="avg-renting-price"></div>
+            <div class="ct-chart" id="avg-apartment-renting-price"></div>
     </section>
 
     <section class ="container" id="chart-avg-selling-price">
         <h3>Średnie ceny sprzedaży mieszkania w Polsce</h3>
-        <div class="ct-chart" id="avg-selling-price"></div>
+        <div class="ct-chart" id="avg-apartment-selling-price"></div>
     </section>
 
     <section class ="container" id="chart-avg-square-meter-price">
         <h3>Średnie ceny jednego metra kwadratowego mieszkania w Polsce</h3>
-        <div class="ct-chart" id="avg-square-meter-price"></div>
+        <div class="ct-chart" id="avg-apartment-square-meter-price"></div>
     </section>
 
     <footer id="main-footer"> </footer>
-    
-    <script src="../../js/main.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+    <script src="../../js/main.js"></script>
 </body>
 </html>
