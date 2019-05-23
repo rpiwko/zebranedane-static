@@ -3,6 +3,8 @@
 <head>
     <title>zebranedane.pl</title>
     <link rel="stylesheet" type="text/css" href="../../css/style.css">
+    <link rel="stylesheet" href="../../chartist/chartist.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">    
 </head>
 <body>
 
@@ -21,10 +23,25 @@
             </ul>
         </div>
     </nav>
+
+    <section class ="container" id="chart-avg-renting-price">
+            <h3>Średnie ceny wynajmu mieszkania w Polsce</h3>
+            <div class="ct-chart" id="avg-renting-price"></div>
+    </section>
+
+    <section class ="container" id="chart-avg-selling-price">
+        <h3>Średnie ceny sprzedaży mieszkania w Polsce</h3>
+        <div class="ct-chart" id="avg-selling-price"></div>
+    </section>
+
+    <section class ="container" id="chart-avg-square-meter-price">
+        <h3>Średnie ceny jednego metra kwadratowego mieszkania w Polsce</h3>
+        <div class="ct-chart" id="avg-square-meter-price"></div>
+    </section>
+
+    <footer id="main-footer"> </footer>
     
-    <footer id="main-footer">
-
-    </footer>
-
+    <script src="../../js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
 </body>
 </html>

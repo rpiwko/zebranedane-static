@@ -49,3 +49,9 @@ a {
     align-content: center;
 }
 
+.chart{
+    align-content: stretch;
+    width: 100;
+    height: 500;
+}
+
