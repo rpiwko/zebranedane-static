@@ -18,7 +18,6 @@ function drawSingleChart(tagId, resultsSet) {
 
     var options = {        
         height: 200,
-        fullWidth: true,
         chartPadding: {
             right: 80
           },

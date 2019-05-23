@@ -52,6 +52,10 @@ a {
     align-content: center;
 }
 
-.chart-bar .ct-bar {
-    stroke-width: 30px
+.chart-bar .ct-bar{
+    stroke-width: 25px
+}
+
+.ct-chart{    
+    margin: 0 20%;
 }
