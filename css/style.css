@@ -8,7 +8,7 @@ header{
     background-color: #c5c5c5;
 }
 
-a {
+header a{
     text-decoration: none;
     color: #353535;
 }
@@ -43,6 +43,7 @@ a {
     font-size: 18px;
     align-content: center;
     color: #ccc;
+    text-decoration: none;
 }
 
 .btn-current-page{
@@ -51,12 +52,76 @@ a {
     color: #808080;
     font-size: 18px;
     align-content: center;
+    text-decoration: none;
 }
 
 .chart-bar .ct-bar{
     stroke-width: 25px
 }
 
-.ct-chart{    
-    margin: 0 15%;
+#parameters-panel{
+    border: 1px #353535 solid;
+    margin: 10px 10px;
+    padding: 10px;
+}
+
+.section-chart{
+    width: 800px;
+    float: left;
+    border: 1px #353535 solid;
+    padding: 10px;
+    margin: 10px;
+}
+
+
+#main-grid-container {
+  display: grid;
+  grid-template-columns: 250px auto;
+  grid-template-rows: 200px 200px 200px 200px;
+  justify-content: space-start;
+  align-content: center;
+  grid-template-areas:
+    'left main'
+    'left main'
+    'left main'
+    'left main'
+    'left main';
+
+}
+
+#parameters-panel { grid-area: left; }
+#charts-container { grid-area: main; }
+
+#parameters-panel{
+    display: grid;
+}
+
+@media screen and (max-width: 1100px){
+    #main-grid-container {
+        display: grid;
+        grid-template-columns: 840px;
+        grid-template-rows: auto auto;
+        grid-template-areas:
+          'left '
+          'main';
+        padding: 10px;
+      }
+
+    #parameters-panel{
+        display: grid;
+        grid-template-columns: auto auto auto;
+        grid-template-rows: 40px auto auto auto;
+        grid-template-areas:
+            'title title title'
+            'rooms cities1 cities2'
+            'condition cities1 cities2'
+            'submit submit submit'
+    }
+
+    #filters-title { grid-area: title }
+    #filters-rooms-no { grid-area: rooms }
+    #filters-condition { grid-area: condition }
+    #filters-cities-1 { grid-area: cities1 }
+    #filters-cities-2 { grid-area: cities2 }
+    #filters-submit { grid-area: submit }
 }

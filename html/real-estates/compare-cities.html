@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>zebranedane.pl</title>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css">    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+</head>
+<body>
+
+    <header id="main-header">
+        <div class="container">
+            <h1><a href="../../index.html">Zebrane Dane</a></h1>
+        </div>
+    </header>
+
+    <nav id="navbar">
+        <div class="container">
+            <ul>
+                <li><a class="btn-nav" href="index.html">Nieruchomości</a></li>
+                <li><a class="btn-current-page" href="compare-cities.html">Porównaj miasta</a></li>
+                <li><a class="btn-nav" href="city-details.html">Sprawdź miasto</a></li>                
+            </ul>
+        </div>
+    </nav>
+
+    <div id="main-grid-container">
+
+        <form id="parameters-panel" action="">
+            <h3 class="parameters-panel-element" id="filters-title">Parametry:</h3>
+            
+            <div class="parameters-panel-element" id="filters-rooms-no">
+                <h4>Liczba pokoi:</h4>
+                <input type="checkbox" value="1" checked>1<br>
+                <input type="checkbox" value="2" checked>2<br>
+                <input type="checkbox" value="3" checked>3 i więcej<br>
+            </div>
+
+            <div class="parameters-panel-element" id="filers-condition">
+                <h4>Stan:</h4>
+                <input type="checkbox" value="1" checked>do zamieszkania<br>
+                <input type="checkbox" value="2" checked>do wykończenia<br>
+                <input type="checkbox" value="3" checked>do remontu<br>
+            </div>
+
+            <div class="parameters-panel-element" id="filters-cities-1">
+                <h4>Miasta:</h4>
+                <input type="checkbox" value="2" >Białystok<br>
+                <input type="checkbox" value="2" >Bydgoszcz<br>
+                <input type="checkbox" value="1" checked>Gdańsk<br>
+                <input type="checkbox" value="2" >Gorzów Wielkopolski<br>
+                <input type="checkbox" value="1" >Katowice<br>
+                <input type="checkbox" value="2" >Kielce<br>
+                <input type="checkbox" value="2" checked>Kraków<br>
+                <input type="checkbox" value="2" checked>Lublin<br>
+            </div>
+            <div class="parameters-panel-element" id="filters-cities-2">
+                <input type="checkbox" value="2" >Opole<br>
+                <input type="checkbox" value="2" checked>Poznań<br>
+                <input type="checkbox" value="1" checked>Rzeszów<br>
+                <input type="checkbox" value="1" checked>Szczecin<br>
+                <input type="checkbox" value="1" >Toruń<br>
+                <input type="checkbox" value="1" checked>Warszawa<br>
+                <input type="checkbox" value="2" checked>Wrocław<br>        
+                <input type="checkbox" value="1" >Zielona Góra<br>
+            </div>
+            
+            <input type="submit" value="Zastosuj filtry" title="" id="filters-submit">
+        </form>
+        
+        <div class="charts-container">
+            <section class ="section-chart chart-bar" id="chart-avg-renting-price">
+                <h3 class="chart-title">Średnia cena wynajmu mieszkania w Polsce</h3>
+                <div class="ct-chart" id="avg-apartment-renting-price"></div>
+            </section>
+
+            <section class ="section-chart chart-bar" id="chart-avg-selling-price">
+                <h3 class="chart-title">Średnia cena sprzedaży mieszkania w Polsce</h3>
+                <div class="ct-chart" id="avg-apartment-selling-price"></div>
+            </section>
+
+            <section class ="section-chart chart-bar" id="chart-avg-square-meter-price">
+                <h3 class="chart-title">Średnia cena jednego metra kwadratowego mieszkania w Polsce</h3>
+                <div class="ct-chart" id="avg-apartment-square-meter-price"></div>
+            </section>
+        </div>
+    
+    </div>
+
+    <footer id="main-footer">
+
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+    <script src="../../js/main.js"></script>
+
+</body>
+</html>
