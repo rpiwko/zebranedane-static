@@ -1,16 +1,16 @@
 body{
-    background-color: #f4f4f4;
+    background-color: #dce1e9;
     color: 250;
     margin: 0;
 }
 
 header{
-    background-color: seagreen;
+    background-color: #c5c5c5;
 }
 
 a {
     text-decoration: none;
-    color: #fff;
+    color: #353535;
 }
 
 .container{
@@ -24,7 +24,7 @@ a {
 }
 
 #navbar{
-    background-color: #333;
+    background-color: #363732;
     color: #fff;
 }
 
@@ -42,6 +42,7 @@ a {
     border: 2px #ccc solid;
     font-size: 18px;
     align-content: center;
+    color: #ccc;
 }
 
 .btn-current-page{
@@ -57,5 +58,5 @@ a {
 }
 
 .ct-chart{    
-    margin: 0 20%;
+    margin: 0 15%;
 }
