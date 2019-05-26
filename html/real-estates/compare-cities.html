@@ -25,7 +25,7 @@
 
     <div id="main-grid-container">
 
-        <form id="parameters-panel" action="">
+        <div id="parameters-panel" action="">
             <h3 class="parameters-panel-element" id="filters-title">Parametry:</h3>
             
             <div class="parameters-panel-element" id="filters-rooms-no">
@@ -44,28 +44,28 @@
 
             <div class="parameters-panel-element" id="filters-cities-1">
                 <h4>Miasta:</h4>
-                <input type="checkbox" value="2" >Białystok<br>
-                <input type="checkbox" value="2" >Bydgoszcz<br>
-                <input type="checkbox" value="1" checked>Gdańsk<br>
-                <input type="checkbox" value="2" >Gorzów Wielkopolski<br>
-                <input type="checkbox" value="1" >Katowice<br>
-                <input type="checkbox" value="2" >Kielce<br>
-                <input type="checkbox" value="2" checked>Kraków<br>
-                <input type="checkbox" value="2" checked>Lublin<br>
+                <input type="checkbox" value="Białystok">Białystok<br>
+                <input type="checkbox" value="Bydgoszcz">Bydgoszcz<br>
+                <input type="checkbox" value="Gdańsk" checked>Gdańsk<br>
+                <input type="checkbox" value="Gorzów Wielkopolski">Gorzów Wielkopolski<br>
+                <input type="checkbox" value="Katowice">Katowice<br>
+                <input type="checkbox" value="Kielce">Kielce<br>
+                <input type="checkbox" value="Kraków" checked>Kraków<br>
+                <input type="checkbox" value="Lublin" checked>Lublin<br>
             </div>
             <div class="parameters-panel-element" id="filters-cities-2">
-                <input type="checkbox" value="2" >Opole<br>
-                <input type="checkbox" value="2" checked>Poznań<br>
-                <input type="checkbox" value="1" checked>Rzeszów<br>
-                <input type="checkbox" value="1" checked>Szczecin<br>
-                <input type="checkbox" value="1" >Toruń<br>
-                <input type="checkbox" value="1" checked>Warszawa<br>
-                <input type="checkbox" value="2" checked>Wrocław<br>        
-                <input type="checkbox" value="1" >Zielona Góra<br>
+                <input type="checkbox" value="Opole">Opole<br>
+                <input type="checkbox" value="Poznań" checked>Poznań<br>
+                <input type="checkbox" value="Rzeszów" checked>Rzeszów<br>
+                <input type="checkbox" value="Szczecin" checked>Szczecin<br>
+                <input type="checkbox" value="Toruń">Toruń<br>
+                <input type="checkbox" value="Warszawa" checked>Warszawa<br>
+                <input type="checkbox" value="Wrocław" checked>Wrocław<br>        
+                <input type="checkbox" value="Zielona Góra">Zielona Góra<br>
             </div>
             
-            <input type="submit" value="Zastosuj filtry" title="" id="filters-submit">
-        </form>
+            <button id="filters-apply" onclick="applyFilters()">Zastosuj filtry</button>
+        </div>
         
         <div class="charts-container">
             <section class ="section-chart chart-bar" id="chart-avg-renting-price">

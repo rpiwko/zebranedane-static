@@ -1,4 +1,43 @@
 
+
+function getCheckedCheckBoxes (formToCheck) {
+  console.log("Getting checked checkBoxes for " + formToCheck)
+
+  var form = document.getElementById(formToCheck);
+  var enabledValues = [];
+
+  for (var i = 0; i < form.children.length; i++) {
+    if (form.children[i].type == "checkbox") {
+      if (form.children[i].checked) {
+        enabledValues.push(form.children[i].value);
+      }
+    }
+  }
+  return enabledValues;
+}
+
+function filterOutResults() {
+  console.log("Getting filter values...");
+
+  // filtersArray needs to include all "technical" nodes, otherwise filter will remove them
+  var filtersArray = ["ts", "results", "queryName", "dimensionLabel", "measureLabel"];
+  
+  // Get cities filter
+  filtersArray.concat(getCheckedCheckBoxes("filters-cities-1"));
+  filtersArray = filtersArray.concat(getCheckedCheckBoxes("filters-cities-2"));
+  console.log("Found filters: " + filtersArray);
+
+  // Actual filtering
+  var filteredDbExtract = JSON.stringify(window.originalDbExtract, filtersArray);
+  console.log("Filtered db extract: " + filteredDbExtract);
+
+  return JSON.parse(filteredDbExtract);
+}
+
+function applyFilters() {
+  drawCharts(filterOutResults());
+}
+
 function drawSingleChart(tagId, resultsSet) {
 
     console.log(resultsSet);
@@ -56,7 +95,8 @@ function drawCharts(dbExtract) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    $.getJSON("../../data/results.json", function(dbExtract) {        
-        drawCharts(dbExtract);
+    $.getJSON("../../data/results.json", function(dbExtract) {
+      window.originalDbExtract = dbExtract
+      drawCharts(dbExtract);
     });    
 })

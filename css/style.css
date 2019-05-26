@@ -123,5 +123,5 @@ header a{
     #filters-condition { grid-area: condition }
     #filters-cities-1 { grid-area: cities1 }
     #filters-cities-2 { grid-area: cities2 }
-    #filters-submit { grid-area: submit }
+    #filters-apply { grid-area: submit }
 }
