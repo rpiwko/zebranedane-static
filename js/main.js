@@ -23,7 +23,7 @@ function filterOutResults() {
   var filtersArray = ["ts", "results", "queryName", "dimensionLabel", "measureLabel"];
   
   // Get cities filter
-  filtersArray.concat(getCheckedCheckBoxes("filters-cities-1"));
+  filtersArray = filtersArray.concat(getCheckedCheckBoxes("filters-cities-1"));
   filtersArray = filtersArray.concat(getCheckedCheckBoxes("filters-cities-2"));
   console.log("Found filters: " + filtersArray);
 
