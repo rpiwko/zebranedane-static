@@ -16,87 +16,157 @@ function getCheckedCheckBoxes (formToCheck) {
   return enabledValues;
 }
 
-function filterOutResults() {
-  console.log("Getting filter values...");
+function getFiltersFromUi() {
+  var filters = {
+    city : [],
+    //condition_id : [],
+    //rooms_no : []
+  };
 
-  // filtersArray needs to include all "technical" nodes, otherwise filter will remove them
-  var filtersArray = ["ts", "results", "queryName", "dimensionLabel", "measureLabel"];
-  
-  // Get cities filter
-  filtersArray = filtersArray.concat(getCheckedCheckBoxes("filters-cities-1"));
-  filtersArray = filtersArray.concat(getCheckedCheckBoxes("filters-cities-2"));
-  console.log("Found filters: " + filtersArray);
+  filters.city = getCheckedCheckBoxes("filters-cities-1");
+  filters.city = filters.city.concat(getCheckedCheckBoxes("filters-cities-2"));  
 
-  // Actual filtering
-  var filteredDbExtract = JSON.stringify(window.originalDbExtract, filtersArray);
-  console.log("Filtered db extract: " + filteredDbExtract);
-
-  return JSON.parse(filteredDbExtract);
+  console.log("Found filters: ");
+  console.log(filters);
+  return filters;
 }
 
-function applyFilters() {
-  drawCharts(filterOutResults());
-}
+function applyFilters(arrayToFilter) {
+  console.log("Starting applyFilters()");
 
-function drawSingleChart(tagId, resultsSet) {
+  var filters = getFiltersFromUi();
 
-    console.log(resultsSet);
-    var charXs = [];
-    var charYs = [];
-    for (var property in resultsSet) {        
-        charXs.push(property)
-        charYs.push(resultsSet[property])
+  for (var filterName in filters) {
+    if (filters.hasOwnProperty(filterName)) {
+      arrayToFilter = arrayToFilter.filter(x => filters[filterName].includes(x[filterName]));
     }
-    console.log(charXs);
-    console.log(charYs);
+  }
 
-    charData = {
-        labels: charXs.slice(0, 8),
-        series: [ charYs.slice(0, 8) ]
-    };
+  console.log("After filtering: ");
+  console.log(arrayToFilter);
 
-    var options = {        
-        height: 200,
-        chartPadding: {
-            right: 80
-          },
-        axisY: {
-            labelInterpolationFnc: function(value) {
-              return (value / 1000) + 'k';
-            }
+  return arrayToFilter;
+}
+
+function calculateAvgforCities(inputArray) {
+  aggregatedValues = {};
+
+  for (const record of inputArray) {
+    console.log(record.city.toString());
+    if (!aggregatedValues[record.city]) {
+      console.log("New city!");      
+      // City not available yet so create it
+      aggregatedValues[record.city] = {"pricesSum" : record.prices_sum, "offersNo" : record.offers_no}
+    }
+    else{
+      console.log("Existing city!");
+      // City already present in aggregatedValue so sum up values
+      aggregatedValues[record.city].pricesSum = aggregatedValues[record.city].pricesSum + record.prices_sum;
+      aggregatedValues[record.city].offersNo = aggregatedValues[record.city].offersNo + record.offers_no;
+    }
+  }
+
+  console.log("aggregatedValues");
+  console.log(aggregatedValues);
+
+  avgValuesForCities = {}
+
+  for (city in aggregatedValues) {
+    if (aggregatedValues.hasOwnProperty(city)) {
+      var avgValue = aggregatedValues[city].pricesSum / aggregatedValues[city].offersNo;
+      avgValuesForCities[city] = avgValue;
+    }
+  }
+
+  console.log("avgValuesForCities");
+  console.log(avgValuesForCities);
+  
+  return avgValuesForCities;
+}
+
+function getRawChartData(tagId) {
+  console.log("Starting getDataForChart() for tagId=" + tagId);
+
+  var dbExtract = JSON.parse(JSON.stringify(window.originalDbExtract));
+  var chartData = dbExtract.results.find(x => x.queryName == tagId.substring(1));
+
+  console.log("Data found for chart: ");
+  console.log(chartData.records);
+
+  return chartData.records;
+}
+
+function drawSingleChart(tagId) {
+  console.log("Starting drawSingleChart() for tagId=" + tagId);
+
+  var chartData = getRawChartData(tagId);
+  chartData = applyFilters(chartData);
+
+  console.log("After filtering: ");
+  console.log(chartData);
+
+  chartData = calculateAvgforCities(chartData);
+  
+  var charXs = [];
+  var charYs = [];
+  for (var property in chartData) {        
+      charXs.push(property)
+      charYs.push(chartData[property])
+  }
+  console.log("charXs:");
+  console.log(charXs);
+  console.log("charYs:");
+  console.log(charYs);
+
+  charData = {
+      labels: charXs.slice(0, 10),
+      series: [ charYs.slice(0, 10) ]
+  };
+
+  var options = {        
+      height: 200,
+      chartPadding: {
+          right: 80
+        },
+      axisY: {
+          labelInterpolationFnc: function(value) {
+            return (value / 1000) + 'k';
+          }
+      }
+  };
+
+  var responsiveOptions = [
+      ['screen and (max-width: 800px)', {
+        axisX: {
+          labelInterpolationFnc: function(value, index) {
+            return index % 2 === 0 ? value : null;
+          }
         }
-    };
-
-    var responsiveOptions = [
-        ['screen and (max-width: 800px)', {
+      }],
+      ['screen and (max-width: 450px)', {
           axisX: {
             labelInterpolationFnc: function(value, index) {
-              return index % 2 === 0 ? value : null;
+              return index % 4 === 0 ? value : null;
             }
           }
-        }],
-        ['screen and (max-width: 450px)', {
-            axisX: {
-              labelInterpolationFnc: function(value, index) {
-                return index % 4 === 0 ? value : null;
-              }
-            }
-          }]
-    ];
+        }]
+  ];
 
-    new Chartist.Bar(tagId, charData, options, responsiveOptions);
+  new Chartist.Bar(tagId, charData, options, responsiveOptions);
 }
 
-function drawCharts(dbExtract) {
+function drawCharts() {
 
-    drawSingleChart("#avg-apartment-renting-price", dbExtract.results[0].results);
-    drawSingleChart("#avg-apartment-selling-price", dbExtract.results[1].results);
-    drawSingleChart("#avg-apartment-square-meter-price", dbExtract.results[2].results);
+    drawSingleChart("#apartment-renting-price");
+    //drawSingleChart("#avg-apartment-selling-price");
+    //drawSingleChart("#avg-apartment-square-meter-price");
 }
 
 document.addEventListener("DOMContentLoaded", function() {
     $.getJSON("../../data/results.json", function(dbExtract) {
-      window.originalDbExtract = dbExtract
-      drawCharts(dbExtract);
+      console.log("dbExtract type: " + typeof(dbExtract));
+      window.originalDbExtract = JSON.parse(JSON.stringify(dbExtract));
+      console.log("window.originalDbExtract type: " + typeof(window.originalDbExtract));
+      drawCharts();
     });    
 })
