@@ -61,20 +61,20 @@ function applyFilters(arrayToFilter) {
   return arrayToFilter;
 }
 
-function calculateAvgforCities(inputArray) {
+function calculateAvgforCities(inputDataObject, measureColumnName) {
   aggregatedValues = {};
 
-  for (const record of inputArray) {
+  for (const record of inputDataObject) {
     console.log(record.city.toString());
     if (!aggregatedValues[record.city]) {
       console.log("New city!");      
       // City not available yet so create it
-      aggregatedValues[record.city] = {"pricesSum" : record.prices_sum, "offersNo" : record.offers_no}
+      aggregatedValues[record.city] = {"sum" : record[measureColumnName], "offersNo" : record.offers_no}
     }
     else{
       console.log("Existing city!");
       // City already present in aggregatedValue so sum up values
-      aggregatedValues[record.city].pricesSum = aggregatedValues[record.city].pricesSum + record.prices_sum;
+      aggregatedValues[record.city].sum = aggregatedValues[record.city].sum + record[measureColumnName];
       aggregatedValues[record.city].offersNo = aggregatedValues[record.city].offersNo + record.offers_no;
     }
   }
@@ -86,7 +86,7 @@ function calculateAvgforCities(inputArray) {
 
   for (city in aggregatedValues) {
     if (aggregatedValues.hasOwnProperty(city)) {
-      var avgValue = aggregatedValues[city].pricesSum / aggregatedValues[city].offersNo;
+      var avgValue = aggregatedValues[city].sum / aggregatedValues[city].offersNo;
       avgValuesForCities[city] = avgValue;
     }
   }
@@ -127,7 +127,7 @@ function getRawChartData(tagId) {
   return chartData.records;
 }
 
-function drawSingleChart(tagId) {
+function drawSingleChart(tagId, measureColumnName) {
   console.log("Starting drawSingleChart() for tagId=" + tagId);
 
   var chartData = getRawChartData(tagId);
@@ -136,7 +136,7 @@ function drawSingleChart(tagId) {
   console.log("After filtering: ");
   console.log(chartData);
 
-  chartData = calculateAvgforCities(chartData);
+  chartData = calculateAvgforCities(chartData, measureColumnName);
   chartDataArray = sortObjectPropertiesByValues(chartData);
   
   var charXs = [];
@@ -159,13 +159,22 @@ function drawSingleChart(tagId) {
       height: 200,
       chartPadding: {
           right: 80
-        },
-      axisY: {
-          labelInterpolationFnc: function(value) {
-            return (value / 1000) + 'k';
-          }
-      }
+        }
   };
+
+  if (measureColumnName == "prices_sum") {
+    var axixYlabelFormat = {
+      labelInterpolationFnc: function(value) {
+        return (value / 1000) + 'k';}};
+    options.axisY = axixYlabelFormat;
+  }
+
+  if (measureColumnName == "areas_sum") {
+    var axixYlabelFormat = {
+      labelInterpolationFnc: function(value) {
+        return value + 'm2';}};
+    options.axisY = axixYlabelFormat;
+  }
 
   var responsiveOptions = [
       ['screen and (max-width: 800px)', {
@@ -189,9 +198,10 @@ function drawSingleChart(tagId) {
 
 function drawCharts() {
 
-    drawSingleChart("#apartment-renting-price");
-    drawSingleChart("#apartment-selling-price");
-    drawSingleChart("#apartment-square-meter-price");
+    drawSingleChart("#apartment-renting-price", "prices_sum");
+    drawSingleChart("#apartment-selling-price", "prices_sum");
+    drawSingleChart("#apartment-square-meter-price", "prices_sum");
+    drawSingleChart("#apartment-area", "areas_sum");
 }
 
 document.addEventListener("DOMContentLoaded", function() {
