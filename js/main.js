@@ -19,7 +19,7 @@ function getCheckedCheckBoxes (formToCheck) {
 function getFiltersFromUi() {
   var filters = {
     city : [],
-    //condition_id : [],
+    condition_id : [],
     rooms_no : []
   };
 
@@ -31,6 +31,12 @@ function getFiltersFromUi() {
     // Include all other values present in DB in rooms_no column
     extraValues = [ "5", "6", "7", "8", "9", "10", "WIĘCEJ NIŻ 10", "więcej niż 10" ];
     filters.rooms_no = filters.rooms_no.concat(extraValues);
+  }
+
+  filters.condition_id = getCheckedCheckBoxes("filters-condition");
+  if (filters.condition_id.includes("NA")) {
+    // Include offers where condition_id was not provided
+    filters.condition_id.push("");
   }
 
   console.log("Found filters: ");
