@@ -20,11 +20,18 @@ function getFiltersFromUi() {
   var filters = {
     city : [],
     //condition_id : [],
-    //rooms_no : []
+    rooms_no : []
   };
 
   filters.city = getCheckedCheckBoxes("filters-cities-1");
-  filters.city = filters.city.concat(getCheckedCheckBoxes("filters-cities-2"));  
+  filters.city = filters.city.concat(getCheckedCheckBoxes("filters-cities-2"));
+
+  filters.rooms_no = getCheckedCheckBoxes("filters-rooms-no");
+  if (filters.rooms_no.includes("4")) {
+    // Include all other values present in DB in rooms_no column
+    extraValues = [ "5", "6", "7", "8", "9", "10", "WIĘCEJ NIŻ 10", "więcej niż 10" ];
+    filters.rooms_no = filters.rooms_no.concat(extraValues);
+  }
 
   console.log("Found filters: ");
   console.log(filters);
