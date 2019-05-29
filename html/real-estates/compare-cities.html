@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>zebranedane.pl</title>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css">    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+</head>
+<body>
+
+    <header id="main-header">
+        <div class="container">
+            <h1><a href="../../index.html">Zebrane Dane</a></h1>
+        </div>
+    </header>
+
+    <nav id="navbar">
+        <div class="container">
+            <ul>
+                <li><a class="btn-nav" href="index.html">Nieruchomości</a></li>
+                <li><a class="btn-current-page" href="compare-cities.html">Porównaj miasta</a></li>
+                <li><a class="btn-nav" href="city-details.html">Sprawdź miasto</a></li>                
+            </ul>
+        </div>
+    </nav>
+
+    <div id="main-grid-container">
+
+        <div id="parameters-panel" action="">
+            <h3 class="parameters-panel-element" id="filters-title">Parametry:</h3>
+            
+            <div class="parameters-panel-element" id="filters-rooms-no">
+                <h4>Liczba pokoi:</h4>
+                <input type="checkbox" value="1" checked>1<br>
+                <input type="checkbox" value="2" checked>2<br>
+                <input type="checkbox" value="3" checked>3<br>
+                <input type="checkbox" value="4" checked>4 i więcej<br>
+            </div>
+
+            <div class="parameters-panel-element" id="filters-condition">
+                <h4>Stan:</h4>                
+                <input type="checkbox" value="DO ZAMIESZKANIA" checked>do zamieszkania<br>
+                <input type="checkbox" value="DO WYKOŃCZENIA" checked>do wykończenia<br>
+                <input type="checkbox" value="DO REMONTU" checked>do remontu<br>
+                <input type="checkbox" value="NA" checked>stan nieznany<br>
+            </div>
+
+            <div class="parameters-panel-element" id="filters-cities-1">
+                <h4>Miasta:</h4>
+                <input type="checkbox" value="Białystok">Białystok<br>
+                <input type="checkbox" value="Bydgoszcz">Bydgoszcz<br>
+                <input type="checkbox" value="Gdańsk" checked>Gdańsk<br>
+                <input type="checkbox" value="Gorzów Wielkopolski">Gorzów Wielkopolski<br>
+                <input type="checkbox" value="Katowice">Katowice<br>
+                <input type="checkbox" value="Kielce">Kielce<br>
+                <input type="checkbox" value="Kraków" checked>Kraków<br>
+                <input type="checkbox" value="Lublin" checked>Lublin<br>
+            </div>
+            <div class="parameters-panel-element" id="filters-cities-2">
+                <input type="checkbox" value="Opole">Opole<br>
+                <input type="checkbox" value="Poznań" checked>Poznań<br>
+                <input type="checkbox" value="Rzeszów" checked>Rzeszów<br>
+                <input type="checkbox" value="Szczecin" checked>Szczecin<br>
+                <input type="checkbox" value="Toruń">Toruń<br>
+                <input type="checkbox" value="Warszawa" checked>Warszawa<br>
+                <input type="checkbox" value="Wrocław" checked>Wrocław<br>        
+                <input type="checkbox" value="Zielona Góra">Zielona Góra<br>
+            </div>
+            
+            <button id="filters-apply" onclick="drawCharts()">Zastosuj filtry</button>
+        </div>
+        
+        <div class="charts-container">
+            <section class ="section-chart chart-bar" id="chart-renting-price">
+                <h3 class="chart-title">Średnia cena wynajmu mieszkania</h3>
+                <div class="ct-chart" id="apartment-renting-price"></div>
+            </section>
+
+            <section class ="section-chart chart-bar" id="chart-selling-price">
+                <h3 class="chart-title">Średnia cena sprzedaży mieszkania</h3>
+                <div class="ct-chart" id="apartment-selling-price"></div>
+            </section>
+
+            <section class ="section-chart chart-bar" id="chart-square-meter-price">
+                <h3 class="chart-title">Średnia cena jednego metra kwadratowego mieszkania</h3>
+                <div class="ct-chart" id="apartment-square-meter-price"></div>
+            </section>
+            <section class ="section-chart chart-bar" id="chart-area">
+                    <h3 class="chart-title">Średnia powierzchnia mieszkania</h3>
+                    <div class="ct-chart" id="apartment-area"></div>
+            </section>
+        </div>
+
+    </div>
+
+    <footer id="main-footer">
+
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+    <script src="../../js/main.js"></script>
+
+</body>
+</html>
