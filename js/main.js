@@ -39,13 +39,13 @@ function getFiltersFromUi() {
     filters.condition_id.push("");
   }
 
-  console.log("Found filters: ");
+  console.log("Found filters:");
   console.log(filters);
+
   return filters;
 }
 
 function applyFilters(arrayToFilter) {
-  console.log("Starting applyFilters()");
 
   var filters = getFiltersFromUi();
 
@@ -55,31 +55,28 @@ function applyFilters(arrayToFilter) {
     }
   }
 
-  console.log("After filtering: ");
+  console.log("Chart data after filtering:");
   console.log(arrayToFilter);
 
   return arrayToFilter;
 }
 
-function calculateAvgforCities(inputDataObject, measureColumnName) {
+function calculateAvgforCities(inputData, measureColumnName) {
   aggregatedValues = {};
 
-  for (const record of inputDataObject) {
-    console.log(record.city.toString());
+  for (const record of inputData) {
     if (!aggregatedValues[record.city]) {
-      console.log("New city!");      
       // City not available yet so create it
       aggregatedValues[record.city] = {"sum" : record[measureColumnName], "offersNo" : record.offers_no}
     }
     else{
-      console.log("Existing city!");
       // City already present in aggregatedValue so sum up values
       aggregatedValues[record.city].sum = aggregatedValues[record.city].sum + record[measureColumnName];
       aggregatedValues[record.city].offersNo = aggregatedValues[record.city].offersNo + record.offers_no;
     }
   }
 
-  console.log("aggregatedValues");
+  console.log("aggregatedValues:");
   console.log(aggregatedValues);
 
   avgValuesForCities = {}
@@ -91,7 +88,7 @@ function calculateAvgforCities(inputDataObject, measureColumnName) {
     }
   }
 
-  console.log("avgValuesForCities");
+  console.log("avgValuesForCities:");
   console.log(avgValuesForCities);
   
   return avgValuesForCities;
@@ -116,12 +113,11 @@ function sortObjectPropertiesByValues(objectToSort) {
 }
 
 function getRawChartData(tagId) {
-  console.log("Starting getDataForChart() for tagId=" + tagId);
 
   var dbExtract = JSON.parse(JSON.stringify(window.originalDbExtract));
   var chartData = dbExtract.results.find(x => x.queryName == tagId.substring(1));
 
-  console.log("Data found for chart: ");
+  console.log("Data found for chart:");
   console.log(chartData.records);
 
   return chartData.records;
@@ -132,16 +128,12 @@ function drawSingleChart(tagId, measureColumnName) {
 
   var chartData = getRawChartData(tagId);
   chartData = applyFilters(chartData);
-
-  console.log("After filtering: ");
-  console.log(chartData);
-
   chartData = calculateAvgforCities(chartData, measureColumnName);
-  chartDataArray = sortObjectPropertiesByValues(chartData);
+  chartData = sortObjectPropertiesByValues(chartData);
   
   var charXs = [];
   var charYs = [];
-  for (var keyValuePair of chartDataArray) {        
+  for (var keyValuePair of chartData) {        
       charXs.push(keyValuePair[0])
       charYs.push(keyValuePair[1])
   }
