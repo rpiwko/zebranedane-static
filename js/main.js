@@ -84,6 +84,24 @@ function calculateAvgforCities(inputArray) {
   return avgValuesForCities;
 }
 
+function sortObjectPropertiesByValues(objectToSort) {
+  var sortedArray = []
+
+  // Convert object to array
+  for (var property in objectToSort) {
+    if (objectToSort.hasOwnProperty(property)) {
+      sortedArray.push([property, objectToSort[property]]);
+    }
+  }
+
+  // Actual sorting (descending)
+  sortedArray.sort(function(a, b) {
+    return b[1] - a[1];
+  })
+
+  return sortedArray;
+}
+
 function getRawChartData(tagId) {
   console.log("Starting getDataForChart() for tagId=" + tagId);
 
@@ -106,12 +124,13 @@ function drawSingleChart(tagId) {
   console.log(chartData);
 
   chartData = calculateAvgforCities(chartData);
+  chartDataArray = sortObjectPropertiesByValues(chartData);
   
   var charXs = [];
   var charYs = [];
-  for (var property in chartData) {        
-      charXs.push(property)
-      charYs.push(chartData[property])
+  for (var keyValuePair of chartDataArray) {        
+      charXs.push(keyValuePair[0])
+      charYs.push(keyValuePair[1])
   }
   console.log("charXs:");
   console.log(charXs);
