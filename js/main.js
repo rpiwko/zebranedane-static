@@ -190,8 +190,8 @@ function drawSingleChart(tagId) {
 function drawCharts() {
 
     drawSingleChart("#apartment-renting-price");
-    //drawSingleChart("#avg-apartment-selling-price");
-    //drawSingleChart("#avg-apartment-square-meter-price");
+    drawSingleChart("#apartment-selling-price");
+    drawSingleChart("#apartment-square-meter-price");
 }
 
 document.addEventListener("DOMContentLoaded", function() {
