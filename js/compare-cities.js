@@ -1,9 +1,8 @@
 function drawCharts() {
-
-  drawSingleChart("#apartment-renting-price", "city", "prices_sum");
-  drawSingleChart("#apartment-selling-price", "city", "prices_sum");
-  drawSingleChart("#apartment-square-meter-price", "city", "prices_sum");
-  drawSingleChart("#apartment-area", "city", "areas_sum");
+  drawSingleChart("#apartment-renting-price", "Bar", "city", "prices_sum");
+  drawSingleChart("#apartment-selling-price", "Bar", "city", "prices_sum");
+  drawSingleChart("#apartment-square-meter-price", "Bar", "city", "prices_sum");
+  drawSingleChart("#apartment-area", "Bar", "city", "areas_sum");
 }
 
 document.addEventListener("DOMContentLoaded", function() {

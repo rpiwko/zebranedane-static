@@ -1,6 +1,5 @@
 function drawCharts() {
-
-  drawSingleChart("#apartment-monthly-renting-price", "offer_date", "prices_sum");
+  drawSingleChart("#apartment-monthly-renting-price", "Line", "offer_date", "prices_sum");
 }
 
 document.addEventListener("DOMContentLoaded", function() {

@@ -124,9 +124,10 @@ function getRawChartData(tagId) {
   return chartData.records;
 }
 
-function drawSingleChart(tagId, aggColumnName, measureColumnName) {
+function drawSingleChart(tagId, chartType, aggColumnName, measureColumnName) {
   console.log("Starting drawSingleChart() for tagId=" + tagId);
 
+  // Prepare data for chart  
   var chartData = getRawChartData(tagId);
   chartData = applyFilters(chartData);
   chartData = calculateAvgforCities(chartData, aggColumnName, measureColumnName);
@@ -143,6 +144,7 @@ function drawSingleChart(tagId, aggColumnName, measureColumnName) {
   console.log("charYs:");
   console.log(charYs);
 
+  // Configure the chart
   charData = {
       labels: charXs.slice(0, 10),
       series: [ charYs.slice(0, 10) ]
@@ -186,5 +188,11 @@ function drawSingleChart(tagId, aggColumnName, measureColumnName) {
         }]
   ];
 
-  new Chartist.Bar(tagId, charData, options, responsiveOptions);
+  if (chartType == "Bar") {
+    new Chartist.Bar(tagId, charData, options, responsiveOptions);
+  }
+
+  if (chartType == "Line") {
+    new Chartist.Line(tagId, charData, options, responsiveOptions);
+  }
 }
