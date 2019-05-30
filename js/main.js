@@ -95,7 +95,7 @@ function calculateAvgforCities(inputData, aggColumnName, measureColumnName) {
   return avgValuesForCities;
 }
 
-function sortObjectPropertiesByValues(objectToSort) {
+function sortObjectPropertiesByNames(objectToSort, columnToSortBy) {
   var sortedArray = []
 
   // Convert object to array
@@ -107,8 +107,11 @@ function sortObjectPropertiesByValues(objectToSort) {
 
   // Actual sorting (descending)
   sortedArray.sort(function(a, b) {
-    return b[1] - a[1];
+    return a[0].localeCompare(b[0]);
   })
+
+  console.log("sortedArray:");
+  console.log(sortedArray);
 
   return sortedArray;
 }
@@ -131,7 +134,7 @@ function drawSingleChart(tagId, chartType, aggColumnName, measureColumnName) {
   var chartData = getRawChartData(tagId);
   chartData = applyFilters(chartData);
   chartData = calculateAvgforCities(chartData, aggColumnName, measureColumnName);
-  chartData = sortObjectPropertiesByValues(chartData);
+  chartData = sortObjectPropertiesByNames(chartData, aggColumnName);
   
   var charXs = [];
   var charYs = [];
