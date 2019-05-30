@@ -1,13 +1,14 @@
 
 
-function getCheckedCheckBoxes (formToCheck) {
+function getCheckedOptions (formToCheck) {
+  // Checks selected checkboxes and radio buttons on formToCheck
   console.log("Getting checked checkBoxes for " + formToCheck)
 
   var form = document.getElementById(formToCheck);
   var enabledValues = [];
 
   for (var i = 0; i < form.children.length; i++) {
-    if (form.children[i].type == "checkbox") {
+    if (form.children[i].type == "checkbox" || form.children[i].type == "radio") {
       if (form.children[i].checked) {
         enabledValues.push(form.children[i].value);
       }
@@ -23,17 +24,17 @@ function getFiltersFromUi() {
     rooms_no : []
   };
 
-  filters.city = getCheckedCheckBoxes("filters-cities-1");
-  filters.city = filters.city.concat(getCheckedCheckBoxes("filters-cities-2"));
+  filters.city = getCheckedOptions("filters-cities-1");
+  filters.city = filters.city.concat(getCheckedOptions("filters-cities-2"));
 
-  filters.rooms_no = getCheckedCheckBoxes("filters-rooms-no");
+  filters.rooms_no = getCheckedOptions("filters-rooms-no");
   if (filters.rooms_no.includes("4")) {
     // Include all other values present in DB in rooms_no column
     extraValues = [ "5", "6", "7", "8", "9", "10", "WIĘCEJ NIŻ 10", "więcej niż 10" ];
     filters.rooms_no = filters.rooms_no.concat(extraValues);
   }
 
-  filters.condition_id = getCheckedCheckBoxes("filters-condition");
+  filters.condition_id = getCheckedOptions("filters-condition");
   if (filters.condition_id.includes("NA")) {
     // Include offers where condition_id was not provided
     filters.condition_id.push("");
@@ -61,18 +62,18 @@ function applyFilters(arrayToFilter) {
   return arrayToFilter;
 }
 
-function calculateAvgforCities(inputData, measureColumnName) {
+function calculateAvgforCities(inputData, aggColumnName, measureColumnName) {
   aggregatedValues = {};
 
   for (const record of inputData) {
-    if (!aggregatedValues[record.city]) {
+    if (!aggregatedValues[record[aggColumnName]]) {
       // City not available yet so create it
-      aggregatedValues[record.city] = {"sum" : record[measureColumnName], "offersNo" : record.offers_no}
+      aggregatedValues[record[aggColumnName]] = {"sum" : record[measureColumnName], "offersNo" : record.offers_no}
     }
     else{
       // City already present in aggregatedValue so sum up values
-      aggregatedValues[record.city].sum = aggregatedValues[record.city].sum + record[measureColumnName];
-      aggregatedValues[record.city].offersNo = aggregatedValues[record.city].offersNo + record.offers_no;
+      aggregatedValues[record[aggColumnName]].sum = aggregatedValues[record[aggColumnName]].sum + record[measureColumnName];
+      aggregatedValues[record[aggColumnName]].offersNo = aggregatedValues[record[aggColumnName]].offersNo + record.offers_no;
     }
   }
 
@@ -123,12 +124,12 @@ function getRawChartData(tagId) {
   return chartData.records;
 }
 
-function drawSingleChart(tagId, measureColumnName) {
+function drawSingleChart(tagId, aggColumnName, measureColumnName) {
   console.log("Starting drawSingleChart() for tagId=" + tagId);
 
   var chartData = getRawChartData(tagId);
   chartData = applyFilters(chartData);
-  chartData = calculateAvgforCities(chartData, measureColumnName);
+  chartData = calculateAvgforCities(chartData, aggColumnName, measureColumnName);
   chartData = sortObjectPropertiesByValues(chartData);
   
   var charXs = [];
