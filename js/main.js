@@ -27,12 +27,7 @@ function getFiltersFromUi() {
   filters.city = getCheckedOptions("filters-cities-1");
   filters.city = filters.city.concat(getCheckedOptions("filters-cities-2"));
 
-  filters.rooms_no = getCheckedOptions("filters-rooms-no");
-  if (filters.rooms_no.includes("4")) {
-    // Include all other values present in DB in rooms_no column
-    extraValues = [ "5", "6", "7", "8", "9", "10", "WIĘCEJ NIŻ 10", "więcej niż 10" ];
-    filters.rooms_no = filters.rooms_no.concat(extraValues);
-  }
+  filters.rooms_no = getCheckedOptions("filters-rooms-no");  
 
   filters.condition_id = getCheckedOptions("filters-condition");
   if (filters.condition_id.includes("NA")) {
@@ -145,10 +140,6 @@ function getRawChartData(tagId) {
   console.log(chartData.records);
 
   return chartData.records;
-}
-
-function drawSingleLineChart() {
-
 }
 
 function drawSingleChart(tagId, chartType, aggColumnName, measureColumnName) {
