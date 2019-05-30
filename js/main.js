@@ -62,16 +62,17 @@ function applyFilters(arrayToFilter) {
   return arrayToFilter;
 }
 
-function calculateAvgforCities(inputData, aggColumnName, measureColumnName) {
-  aggregatedValues = {};
+function calculateAvg(inputData, aggColumnName, measureColumnName) {
 
+  // Count whole sum and total offers no, then group by aggColumnName (e.g. city, month etc.)  
+  var aggregatedValues = {};
   for (const record of inputData) {
     if (!aggregatedValues[record[aggColumnName]]) {
-      // City not available yet so create it
+      // Value (city or month) not available yet so create it
       aggregatedValues[record[aggColumnName]] = {"sum" : record[measureColumnName], "offersNo" : record.offers_no}
     }
     else{
-      // City already present in aggregatedValue so sum up values
+      // Value (city or month) already present in aggregatedValue so sum up values
       aggregatedValues[record[aggColumnName]].sum = aggregatedValues[record[aggColumnName]].sum + record[measureColumnName];
       aggregatedValues[record[aggColumnName]].offersNo = aggregatedValues[record[aggColumnName]].offersNo + record.offers_no;
     }
@@ -80,22 +81,41 @@ function calculateAvgforCities(inputData, aggColumnName, measureColumnName) {
   console.log("aggregatedValues:");
   console.log(aggregatedValues);
 
-  avgValuesForCities = {}
-
-  for (city in aggregatedValues) {
-    if (aggregatedValues.hasOwnProperty(city)) {
-      var avgValue = aggregatedValues[city].sum / aggregatedValues[city].offersNo;
-      avgValuesForCities[city] = avgValue;
+  // Count the average base on sum and total offers no counted in previous step
+  avgValues = {}
+  for (aggColumn in aggregatedValues) {
+    if (aggregatedValues.hasOwnProperty(aggColumn)) {
+      var avgValue = aggregatedValues[aggColumn].sum / aggregatedValues[aggColumn].offersNo;
+      avgValues[aggColumn] = avgValue;
     }
   }
 
-  console.log("avgValuesForCities:");
-  console.log(avgValuesForCities);
+  console.log("avgValues:");
+  console.log(avgValues);
   
-  return avgValuesForCities;
+  return avgValues;
 }
 
-function sortObjectPropertiesByNames(objectToSort, columnToSortBy) {
+function calculateSum(inputData, aggColumnName, measureColumnName) {
+  var sumValues = {};
+  for (const record of inputData) {
+    if (!sumValues[record[aggColumnName]]) {
+      // Value (e.g. month) not available yet so create it
+      sumValues[record[aggColumnName]] = record[measureColumnName];
+    }
+    else{
+      // Value (e.g. month) already present in aggregatedValue so sum up values
+      sumValues[record[aggColumnName]] = sumValues[record[aggColumnName]] + record[measureColumnName];
+    }
+  }
+
+  console.log("sumValues:");
+  console.log(sumValues);
+  
+  return sumValues;
+}
+
+function sortObjectPropertiesByNames(objectToSort) {
   var sortedArray = []
 
   // Convert object to array
@@ -127,13 +147,22 @@ function getRawChartData(tagId) {
   return chartData.records;
 }
 
+function drawSingleLineChart() {
+
+}
+
 function drawSingleChart(tagId, chartType, aggColumnName, measureColumnName) {
   console.log("Starting drawSingleChart() for tagId=" + tagId);
 
   // Prepare data for chart  
   var chartData = getRawChartData(tagId);
   chartData = applyFilters(chartData);
-  chartData = calculateAvgforCities(chartData, aggColumnName, measureColumnName);
+  if (chartType == "AVG") {
+    chartData = calculateAvg(chartData, aggColumnName, measureColumnName);
+  }
+  if (chartType == "SUM") {
+    chartData = calculateSum(chartData, aggColumnName, measureColumnName);
+  }
   chartData = sortObjectPropertiesByNames(chartData, aggColumnName);
   
   var charXs = [];
@@ -149,6 +178,7 @@ function drawSingleChart(tagId, chartType, aggColumnName, measureColumnName) {
 
   // Configure the chart
   charData = {
+      // limit number of Y-axis values to 10
       labels: charXs.slice(0, 10),
       series: [ charYs.slice(0, 10) ]
   };
@@ -191,11 +221,6 @@ function drawSingleChart(tagId, chartType, aggColumnName, measureColumnName) {
         }]
   ];
 
-  if (chartType == "Bar") {
-    new Chartist.Bar(tagId, charData, options, responsiveOptions);
-  }
-
-  if (chartType == "Line") {
-    new Chartist.Line(tagId, charData, options, responsiveOptions);
-  }
+  // Call chart drawing (specific for each page)
+  callChartDrawing(tagId, charData, options, responsiveOptions);  
 }
