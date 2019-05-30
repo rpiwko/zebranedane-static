@@ -197,7 +197,7 @@ function drawCharts() {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    $.getJSON("../../data/results.json", function(dbExtract) {
+    $.getJSON("../data/results.json", function(dbExtract) {
       console.log("dbExtract type: " + typeof(dbExtract));
       window.originalDbExtract = JSON.parse(JSON.stringify(dbExtract));
       console.log("window.originalDbExtract type: " + typeof(window.originalDbExtract));
