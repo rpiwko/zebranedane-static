@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>zebranedane.pl</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+</head>
+<body>
+
+    <header id="main-header">
+        <div class="container">
+            <h1><a href="../index.html">Zebrane Dane</a></h1>
+        </div>
+    </header>
+
+    <nav id="navbar">
+        <div class="container">            
+            <ul>
+                <li><a class="btn-nav" href="index.html">Nieruchomości</a></li>
+                <li><a class="btn-nav"  href="compare-cities.html">Porównaj miasta</a></li>
+                <li><a class="btn-current-page" href="city-details.html">Sprawdź miasto</a></li>                
+            </ul>
+        </div>
+    </nav>
+    
+
+    <div id="main-grid-container">
+
+        <div id="parameters-panel" action="">
+            <h3 class="parameters-panel-element" id="filters-title">Parametry:</h3>
+            
+            <div class="parameters-panel-element" id="filters-rooms-no">
+                <h4>Liczba pokoi:</h4>
+                <input type="checkbox" value="1" checked>1<br>
+                <input type="checkbox" value="2" checked>2<br>
+                <input type="checkbox" value="3" checked>3<br>
+                <input type="checkbox" value="4" checked>4 i więcej<br>
+            </div>
+
+            <div class="parameters-panel-element" id="filters-condition">
+                <h4>Stan:</h4>                
+                <input type="checkbox" value="DO ZAMIESZKANIA" checked>do zamieszkania<br>
+                <input type="checkbox" value="DO WYKOŃCZENIA" checked>do wykończenia<br>
+                <input type="checkbox" value="DO REMONTU" checked>do remontu<br>
+                <input type="checkbox" value="NA" checked>stan nieznany<br>
+            </div>
+
+            <div class="parameters-panel-element" id="filters-cities-1">
+                <h4>Miasto:</h4>
+                <input type="radio" name="city" value="Białystok">Białystok<br>
+                <input type="radio" name="city" value="Bydgoszcz">Bydgoszcz<br>
+                <input type="radio" name="city" value="Gdańsk">Gdańsk<br>
+                <input type="radio" name="city" value="Gorzów Wielkopolski">Gorzów Wielkopolski<br>
+                <input type="radio" name="city" value="Katowice">Katowice<br>
+                <input type="radio" name="city" value="Kielce">Kielce<br>
+                <input type="radio" name="city" value="Kraków">Kraków<br>
+                <input type="radio" name="city" value="Lublin">Lublin<br>
+            </div>
+            <div class="parameters-panel-element" id="filters-cities-2">
+                <input type="radio" name="city" value="Opole">Opole<br>
+                <input type="radio" name="city" value="Poznań">Poznań<br>
+                <input type="radio" name="city" value="Rzeszów">Rzeszów<br>
+                <input type="radio" name="city" value="Szczecin">Szczecin<br>
+                <input type="radio" name="city" value="Toruń">Toruń<br>
+                <input type="radio" name="city" value="Warszawa">Warszawa<br>
+                <input type="radio" name="city" value="Wrocław" checked>Wrocław<br>        
+                <input type="radio" name="city" value="Zielona Góra">Zielona Góra<br>
+            </div>
+            
+            <button id="filters-apply" onclick="drawCharts()">Zastosuj filtry</button>
+        </div>
+        
+        <div class="charts-container">
+            <section class ="section-chart chart-bar" id="chart-monthly-renting-price">
+                <h3 class="chart-title">Zmiana średniej ceny wynajmu mieszkania</h3>
+                <div class="ct-chart" id="apartment-monthly-renting-price"></div>
+            </section>
+
+            <section class ="section-chart chart-bar" id="chart-monthly-renting-offers-no">
+                <h3 class="chart-title">Zmiana liczby ofert wynajmu mieszkania</h3>
+                <div class="ct-chart" id="apartment-monthly-renting-offers-no"></div>
+            </section>
+
+            <section class ="section-chart chart-bar" id="chart-monthly-selling-price">
+                <h3 class="chart-title">Zmiana średniej cena sprzedaży mieszkania</h3>
+                <div class="ct-chart" id="apartment-monthly-selling-price"></div>
+            </section>            
+
+            <section class ="section-chart chart-bar" id="chart-monthly-selling-offers-no">
+                <h3 class="chart-title">Zmiana liczby ofert sprzedaży mieszkania</h3>
+                <div class="ct-chart" id="apartment-monthly-selling-offers-no"></div>
+            </section>
+
+        </div>
+    </div>
+
+
+    <footer id="main-footer">
+
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/city-details.js"></script>
+
+</body>
+</html>
