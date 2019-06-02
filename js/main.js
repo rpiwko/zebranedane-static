@@ -176,6 +176,7 @@ function drawSingleChart(tagId, chartType, aggColumnName, measureColumnName) {
 
   var options = {        
       height: 200,
+      referenceValue: Math.min.apply(Math, charYs),
       chartPadding: {
           right: 80
         }
