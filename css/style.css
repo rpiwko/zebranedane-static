@@ -35,17 +35,17 @@ header a{
 
 .btn-nav{
     padding: 10px;
-    border: 2px #ccc solid;
+    border: 2px #808080 solid;
+    color: #808080;    
     font-size: 18px;
-    align-content: center;
-    color: #ccc;
+    align-content: center;    
     text-decoration: none;
 }
 
 .btn-current-page{
     padding: 10px;
-    border: 2px #808080 solid;
-    color: #808080;
+    border: 2px #ccc solid;
+    color: #ccc;
     font-size: 18px;
     align-content: center;
     text-decoration: none;
