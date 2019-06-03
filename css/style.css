@@ -19,12 +19,8 @@ header a{
     overflow: hidden;
 }
 
-.chart-title{
-    text-align: center;
-}
-
 #navbar{
-    background-color: #363732;
+    background: #363732;
     color: #fff;
 }
 
@@ -53,6 +49,21 @@ header a{
     font-size: 18px;
     align-content: center;
     text-decoration: none;
+}
+
+#main-footer{
+    background: #363732;;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.chart-title{
+    text-align: center;
 }
 
 .chart-bar .ct-bar{
@@ -86,7 +97,6 @@ header a{
     'left main'
     'left main'
     'left main';
-
 }
 
 #parameters-panel { grid-area: left; }
@@ -123,5 +133,5 @@ header a{
     #filters-condition { grid-area: condition }
     #filters-cities-1 { grid-area: cities1 }
     #filters-cities-2 { grid-area: cities2 }
-    #filters-apply { grid-area: submit }
+    #filters-apply { grid-area: submit }    
 }
