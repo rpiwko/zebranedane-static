@@ -30,7 +30,7 @@ header a{
 }
 
 #navbar li{
-    display: inline;
+    display: inline-flex;
 }
 
 .btn-nav{
@@ -39,7 +39,7 @@ header a{
     color: #808080;    
     font-size: 18px;
     align-content: center;    
-    text-decoration: none;
+    text-decoration: none;    
 }
 
 .btn-current-page{
