@@ -1,0 +1,122 @@
+
+------------------------------------------
+TODO:
+
+- naprawić wygląd na komórkach
+    - navbar
+    - footer
+- dane:
+    - sprawdzić skoki cen sprzedaży:
+        - kwiecień, Warszawa, mieszkania dwu i trzypokojowe
+- Wygląd:
+    - zawartość powinna być na środku, a nie z lewej
+    - tooltipy z dokładną wartością słupka na "Porównaj miasta"
+    - CSS dla panelu z filtrami
+- Django
+
+
+x Domena:
+    x wykupić
+    x podłączyć
+x analiza ruchu
+x Deployment na Netlify lub GitHub pages
+x Opisy:
+    x strona "Zebrane dane"
+    x strona "Nieruchomości"
+x Footer
+x Skrypt do eksportu:
+    x dodać ograniczenia na daty
+    x usunąć ORDER BY
+x Strona "Porównaj miasta":
+    x zmiana nazwy pliku z danymi
+    x wykresy:
+        x Średni rok budowy nieruchomości
+        x Liczba ofert sprzedaży
+        x Liczba ofert najmu   
+    x poprawić układ kodu HTML dla "chart-area"
+    x sortowanie słupków po nazwie miasta zamiast po statystykach
+x Strona "Sprawdź miasto"
+    x wykresy:
+        x średnia cena najmu/sprzedaży na przestrzeni miesięcy
+        x liczba ofert najmu/sprzedaży na przestrzeni miesięcy
+        v dystrybucja ceny wynajmu/sprzedaży w bieżącym miesiącu
+x wykresy - porównanie miast
+x skrypt w Pythonie do generowania danych
+x szkielet strony (bez wykresów, ew. z placeholderami)
+
+
+------------------------------------------
+
+
+Pomysły na nazwy:
+- zebranedane.pl
+- otostatystyki.pl
+
+Podstrony:
+- nieruchomości
+- praca w IT (poszukiwane umiejętności, zarobki etc.)
+
+
+
+Porównanie miast - mieszkania
+-----------------------------
+- średnia cena zakupu mieszkania
+- średnia cena metra kwadratowego
+- średnia cena wynajmu
+- średni wiek nieruchomości
+- średnia powierzchnia mieszkania i pokoju
+
+
+Miasto - trendy
+---------------
+- ceny zakupu mieszkania - rynek pierwotny, do zamieszkania
+    - mieszkania 1-pokojowe
+    - mieszkania 2-pokojowe
+    - mieszkania 3-pokojowe
+    - mieszkanie 4- i więcej pokojowe
+- ceny zakupu mieszkania - rynek wtórny, do zamieszkania
+    - mieszkania 1-pokojowe
+    - mieszkania 2-pokojowe
+    - mieszkania 3-pokojowe
+    - mieszkanie 4- i więcej pokojowe
+- ceny wynajmu mieszkania
+    - mieszkania 1-pokojowe
+    - mieszkania 2-pokojowe
+    - mieszkania 3-pokojowe
+    - mieszkanie 4- i więcej pokojowe
+- 
+
+
+
+Biblioteki z wykresami:
+- przegląd: https://www.sitepoint.com/15-best-javascript-charting-libraries/
+- najciekawsza: http://gionkunz.github.io/chartist-js/index.html
+
+Domena:
+https://www.namecheap.com/
+
+
+--------------------------------------------------------------------------------------------------------
+
+Kolejne strony zawierają dane o rynku nieruchmości w Polsce.
+
+Strona *Porównaj miasta* to zestawienie wykresów dla stolic województw. Raport ilustruje różnice pomiędzy rynkami nieruchomości w największych miastach w *poprzednim miesiącu kalendarzowym*. Dane dla bieżącego miesiąca są w trakcie zbierania i opracowywania i zostaną udostępnione tak szybko, jak tylko będzie to możliwe, tj. nie wcześniej niż na początku kolejnego miesiąca.
+
+Strona *Sprawdź miasto* z kolei pozwala bardziej szczegółowo prześledzić trendy w poszczególnych ośrodkach. Umieszczone tu wykresy ukazują, jak w ostatnich miesiącach zmieniały się ceny nieruchomości w zależności od zadanych parametrów (liczba pokoi, stan wykończnia etc.). Dostępny w tej chwili okres obejmuje miesiące od grudnia 2018 włącznie.
+
+--------------------------------------------------------------------------------------------------------
+
+Strona prezentująca wyniki analiz danych zebranych z różnych zakątków Internetu.
+
+Strona ma charakter wyłącznie poglądowy i hobbystyczny. Prezentowane tu informacje mogą zawierać błędy lub ukazywać obraz zniekształcony. Autor nie może brać żadnej odpowiedzialności za rzetelność danych, z których korzystał ani za dobór ich źródeł. Wskazana jest daleko idąca ostrożność przy podejmowaniu na ich podstawie jakicholwiek decyzji, czy to finansowych, czy to zawodowych.
+
+
+
+
+
+
+
+
+
+
+
